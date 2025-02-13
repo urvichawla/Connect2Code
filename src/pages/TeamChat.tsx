@@ -779,7 +779,7 @@ function TeamChat() {
           return (
             <div 
               key={member.uid} 
-              className="bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition-all cursor-pointer"
+              className="bg-gray-400 rounded-lg p-3 shadow-sm hover:shadow-md transition-all cursor-pointer"
               onClick={() => toggleMemberDetails(member.uid)}
             >
               <div className="flex items-center space-x-3">
@@ -822,14 +822,14 @@ function TeamChat() {
   return (
     <div className="mt-0 sm:mt-20">
       <ToastContainer position="top-right" />
-      <div className="w-full max-w-6xl mx-auto px-0 sm:px-4 py-0 sm:py-8 bg-gradient-to-br from-blue-50 to-blue-100 min-h-screen">
-        <div className="bg-white h-screen sm:h-[calc(100vh-4rem)] sm:rounded-2xl shadow-xl overflow-hidden border border-blue-100 flex flex-col lg:flex-row">
+      {/* <div className="w-full max-w-6xl mx-auto px-0 sm:px-4 py-0 sm:py-8 bg-gradient-to-br from-blue-50 to-blue-100 min-h-screen"> */}
+        <div className="bg- h-screen sm:h-[calc(100vh-4rem)] sm:rounded-2xl shadow-xl overflow-hidden border border-blue-100 flex flex-col lg:flex-row">
           {/* Chat Area */}
           <div className="flex-1 flex flex-col h-full">
             {/* Team Header */}
-            <div className="p-2 sm:p-4 border-b bg-blue-50 flex items-center justify-between">
+            <div className="p-2 sm:p-4 border-b bg-gray-600 flex items-center justify-between">
               <div className="flex items-center">
-                <h1 className="text-lg sm:text-2xl font-bold text-blue-800">{team?.name}</h1>
+                <h1 className="text-xl sm:text-3xl font-bold text-gray-200 sm:text-gray-100 tracking-tighter leading-tight drop-shadow-md">{team?.name}</h1>
                 <Button
                   variant="ghost"
                   className="ml-2 lg:hidden"
@@ -840,7 +840,7 @@ function TeamChat() {
               </div>
               <Button 
                 variant="outline" 
-                className="text-blue-600 hover:bg-blue-50"
+                className="bg-gradient-to-r from-pink-500 to-purple-500 text-white shadow-lg hover:shadow-xl transition-all group"
                 onClick={generateInviteLink}
               >
                 <UserPlus className="h-4 w-4 sm:h-5 sm:w-5 sm:mr-2" />
@@ -852,12 +852,12 @@ function TeamChat() {
             {showInviteLink && inviteLink && (
               <div className="p-2 sm:p-4 bg-blue-50 flex flex-col sm:flex-row items-start sm:items-center justify-between relative space-y-2 sm:space-y-0">
                 <div className="flex-1 w-full sm:mr-4">
-                  <p className="text-sm text-blue-800 font-medium">Share this invite link</p>
+                  <p className="text-sm text-black-800 font-medium">Share this invite link</p>
                   <input 
                     type="text" 
                     readOnly 
                     value={`${window.location.origin}${inviteLink}`} 
-                    className="w-full text-sm bg-white rounded-md p-2 mt-2 truncate"
+                    className="w-full text-sm bg-gray-200 rounded-md p-2 mt-2 truncate"
                   />
                 </div>
                 <div className="flex space-x-2 w-full sm:w-auto">
@@ -885,7 +885,7 @@ function TeamChat() {
             )}
   
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-2 sm:p-4 space-y-3 sm:space-y-4 bg-gray-50">
+            <div className="flex-1 overflow-y-auto p-2 sm:p-4 space-y-3 sm:space-y-4 bg-gray-800">
               {messages.map((message) => {
                 const isCurrentUser = message.senderId === user?.uid;
                 const senderName = message.senderName || 'Anonymous';
@@ -912,9 +912,9 @@ function TeamChat() {
                         </div>
                       )}
                       <div
-                        className={`px-3 py-2 sm:px-4 sm:py-2 rounded-xl sm:rounded-2xl relative ${
+                        className={`px-3 py-2 sm:px-4 sm:py-2 rounded-xl sm:rounded-2xl relative border-2 border-white-400  relative ${
                           isCurrentUser
-                            ? 'bg-pink-400 text-white'
+                            ? 'bg-pink-400  text-white'
                             : 'bg-white text-gray-900 border border-gray-200'
                         }`}
                       >
@@ -1010,7 +1010,7 @@ function TeamChat() {
           </div>
         </div>
       </div>
-    </div>
+  
   );
 }
 

@@ -496,17 +496,17 @@ export default function CreateTeam() {
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
-    className="max-w-5xl mx-auto px-4 py-8 bg-gradient-to-br from-blue-50 to-blue-100 min-h-screen"
+    // className="max-w-5xl mx-auto px-4 py-8 bg-gradient-to-br from-blue-50 to-blue-100 min-h-screen"
   >
-    <div className="bg-white rounded-2xl shadow-2xl p-8 space-y-8">
+    <div className="bg-zinc-800  rounded-2xl sm:rounded-3xl shadow-xl sm:shadow-2xl p-4 sm:p-8 border border-gray-100 transform transition-all hover:scale-[1.01]">
       <motion.div 
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.2 }}
       >
-        <h1 className="text-3xl font-bold mb-6 text-blue-900 flex items-center">
-          <Users className="mr-4 text-blue-500" />
-          Create a New Team
+        <h1 className="text-3xl font-bold mb-6 text-gray-200 flex items-center">
+         
+          Create Your Team
         </h1>
       </motion.div>
 
@@ -519,7 +519,7 @@ export default function CreateTeam() {
           className="grid md:grid-cols-2 gap-6"
         >
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Team Name</label>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Team Name</label>
             <div className="relative">
               <input
                 type="text"
@@ -540,7 +540,7 @@ export default function CreateTeam() {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Team Description</label>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Team Description</label>
             <textarea
               className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
               rows={4}
@@ -557,8 +557,8 @@ export default function CreateTeam() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
         >
-          <h2 className="text-xl font-semibold mb-4 text-blue-900 flex items-center">
-            <Plus className="mr-2 text-blue-500" />
+          <h2 className="text-xl font-semibold mb-4 text-gray-300 flex items-center">
+            
             Select Team Members
           </h2>
 
@@ -678,22 +678,15 @@ export default function CreateTeam() {
           transition={{ delay: 0.5 }}
           className="flex justify-end space-x-4 mt-8"
         >
-          <Button 
-            variant="outline" 
-            onClick={() => navigate('/teams')}
-            className="hover:bg-gray-100 transition-colors"
-          >
-            Cancel
-          </Button>
-          <Button
+           <Button
             onClick={handleCreateTeam}
             disabled={creating || !teamName.trim() || selectedMembers.length === 0}
-            className="flex items-center space-x-2"
+            className="flex items-center space-x-2 bg-gradient-to-r from-pink-500 to-purple-500 text-white shadow-lg hover:shadow-xl transition-all group"
           >
             {creating ? (
               <>
                 <div className="animate-spin mr-2">
-                  <Users className="h-4 w-4" />
+                  
                 </div>
                 Creating...
               </>
@@ -701,6 +694,14 @@ export default function CreateTeam() {
               'Create Team'
             )}
           </Button>
+          <Button 
+            variant="outline" 
+            onClick={() => navigate('/teams')}
+            className="hover:bg-gray-100 transition-colors"
+          >
+            Cancel
+          </Button>
+         
         </motion.div>
       </div>
     </div>

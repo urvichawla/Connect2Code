@@ -182,14 +182,13 @@
 //     </motion.nav>
 //   );
 // }
-
 import { Link } from 'react-router-dom';
 import { Users, Handshake, Network, UserCircle, LogIn, LogOut, MessageCircle, Sparkles, Menu, X } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { auth } from '@/lib/firebase';
 import { Button } from './ui/Button';
 import RequestNotifications from './RequestNotifications';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 
 export default function Navbar() {
@@ -203,9 +202,13 @@ export default function Navbar() {
       transition={{ duration: 0.5 }}
       className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-purple-900 via-purple-700 to-pink-600 shadow-lg backdrop-blur-md"
     >
-      <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
-        <div className="flex h-14 sm:h-16 items-center justify-between">
-          <Link to="/" className="flex items-center space-x-3 group">
+      <div className="container mx-auto px-6 sm:px-8 md:px-12 lg:px-16">
+        <div className="flex h-16 items-center justify-between">
+          <div className="flex items-center space-x-8">
+            {/* <Link to="/" className="text-2xl font-bold text-white hover:text-gray-300 transition-colors">
+              Connect2Code
+            </Link> */}
+             <Link to="/" className="flex items-center space-x-3 group">
             <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
               <Network className="h-7 w-7 text-white group-hover:text-gray-300 transition-colors" />
             </motion.div>
@@ -213,67 +216,43 @@ export default function Navbar() {
               Connect2Code
             </span>
           </Link>
-
-          {/* Mobile Menu Button */}
-          <div className="sm:hidden">
-            <Button variant="ghost" size="icon" onClick={() => setIsOpen(!isOpen)}>
-              {isOpen ? (
-                <X className="h-5 w-5 text-white" />
-              ) : (
-                <Menu className="h-5 w-5 text-white" />
-              )}
-            </Button>
-          </div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden sm:flex items-center space-x-4">
-            {user ? (
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ staggerChildren: 0.1 }} className="flex items-center space-x-4">
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Link to="/teams">
-                    <Button variant="ghost" className="group text-white hover:text-gray-300">
-                      <Sparkles className="h-5 w-5" />
-                      <span className="hidden md:inline ml-2 font-bold text-white">Find Teams</span>
-                    </Button>
-                  </Link>
-                </motion.div>
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Link to="/team-chat">
-                    <Button variant="ghost" className="group text-white hover:text-gray-300">
-                      <MessageCircle className="h-5 w-5" />
-                      <span className="hidden md:inline ml-2">Chats</span>
-                    </Button>
-                  </Link>
-                </motion.div>
-                <RequestNotifications />
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Link to="/profile">
-                    <Button variant="ghost" className="group text-white hover:text-gray-300">
-                      <UserCircle className="h-5 w-5" />
-                      <span className="hidden md:inline ml-2">Profile</span>
-                    </Button>
-                  </Link>
-                </motion.div>
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button
-                    variant="outline"
-                    onClick={() => auth.signOut()}
-                    className="group border-gray-300 text-white hover:border-gray-400"
-                  >
-                    <LogOut className="h-5 w-5 group-hover:rotate-45 transition-transform" />
-                    <span className="hidden md:inline ml-2">Sign Out</span>
-                  </Button>
-                </motion.div>
-              </motion.div>
-            ) : (
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Link to="/login">
-                  <Button className="bg-white text-purple-900 hover:bg-gray-200">
-                    <LogIn className="h-5 w-5" />
-                    <span className="hidden md:inline ml-2">Sign In</span>
+            {user && (
+              <>
+                <Link to="/teams">
+                  <Button className="bg-transparent hover:bg-white hover:text-purple-900 px-5 py-2 font-semibold rounded-lg transition-all">
+                    Find Teams
                   </Button>
                 </Link>
-              </motion.div>
+                <Link to="/profile">
+                  <Button className="bg-transparent hover:bg-white hover:text-purple-900 px-5 py-2 font-semibold rounded-lg transition-all">
+                    Profile
+                  </Button>
+                </Link>
+              </>
+            )}
+          </div>
+          <div className="flex items-center space-x-8">
+            {user ? (
+              <>
+                <Link to="/team-chat">
+                  <Button className="bg-transparent hover:bg-white hover:text-purple-900 px-5 py-2 font-semibold rounded-lg transition-all">
+                    Chats
+                  </Button>
+                </Link>
+                <RequestNotifications className="bg-white text-purple-900 hover:bg-gray-200 px-5 py-2 font-semibold rounded-lg transition-all" />
+                <Button
+                  onClick={() => auth.signOut()}
+                  className="bg-white text-purple-900 hover:bg-gray-200 px-5 py-2 font-semibold rounded-lg transition-all"
+                >
+                  Sign Out
+                </Button>
+              </>
+            ) : (
+              <Link to="/login">
+                <Button className="bg-white text-purple-900 hover:bg-gray-200 px-5 py-2 font-semibold rounded-lg transition-all">
+                  Sign In
+                </Button>
+              </Link>
             )}
           </div>
         </div>
