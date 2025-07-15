@@ -97,19 +97,19 @@ export default function Navbar() {
                 {user ? (
                   <>
                     <Link to="/teams" onClick={() => setIsOpen(false)}>
-                      <Button variant="ghost" className="w-full justify-start">
+                      <Button variant="ghost" className="w-full justify-start text-white">
                         <Sparkles className="h-5 w-5 text-white mr-2" />
                         Find Teams
                       </Button>
                     </Link>
                     <Link to="/profile" onClick={() => setIsOpen(false)}>
-                      <Button variant="ghost" className="w-full justify-start">
+                      <Button variant="ghost" className="w-full justify-start text-white">
                         <UserCircle className="h-5 w-5 text-white mr-2" />
                         Profile
                       </Button>
                     </Link>
                     <Link to="/team-chat" onClick={() => setIsOpen(false)}>
-                      <Button variant="ghost" className="w-full justify-start">
+                      <Button variant="ghost" className="w-full justify-start text-white">
                         <MessageCircle className="h-5 w-5 text-white mr-2" />
                         Chats
                       </Button>
