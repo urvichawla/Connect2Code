@@ -114,7 +114,7 @@ export default function Navbar() {
                         Chats
                       </Button>
                     </Link>
-                    <div className="w-full flex justify-start">
+                    <div className="w-full flex justify-start text-white">
                       <RequestNotifications />
                     </div>
                     <Button
