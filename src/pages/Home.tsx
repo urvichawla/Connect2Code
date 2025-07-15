@@ -327,7 +327,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UserPlus,Users, Rocket, Calendar, MessageSquare, ChevronRight, Check, Star, Share2, UserCog, MessageCircle } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/Button';
 import { useAuth } from '@/context/AuthContext';
 import { motion } from 'framer-motion';
 
