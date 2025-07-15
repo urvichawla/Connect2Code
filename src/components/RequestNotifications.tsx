@@ -3,7 +3,7 @@ import { collection, query, where, onSnapshot, doc, updateDoc } from 'firebase/f
 import { Bell } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { db } from '@/lib/firebase';
-import { Button } from './ui/Button';
+import { Button } from '@/components/ui/button';
 import { TeamRequest } from '@/types';
 
 export default function RequestNotifications() {

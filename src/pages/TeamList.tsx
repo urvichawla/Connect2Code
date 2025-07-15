@@ -716,7 +716,7 @@ import { Link } from 'react-router-dom';
 import { collection, query, where, getDocs, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { useAuth } from '@/context/AuthContext';
 import { db } from '@/lib/firebase';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/ui/button';
 import { Team } from '@/types';
 import { Users, MessageCircle, LogOut, Trash2, X } from 'lucide-react';
 

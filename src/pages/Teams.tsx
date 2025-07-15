@@ -1092,7 +1092,7 @@ import {
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { db } from '@/lib/firebase';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/ui/button';
 import { User, SkillCategory, TeamRequest } from '@/types';
 import { 
   Users, Search, Filter, Code, Palette, Phone, Database, 

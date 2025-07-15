@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Network, UserCircle, LogIn, LogOut, MessageCircle, Sparkles, Menu, X } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { auth } from '@/lib/firebase';
-import { Button } from './ui/Button';
+import { Button } from '@/components/ui/button';
 import RequestNotifications from './RequestNotifications';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
