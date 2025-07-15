@@ -216,27 +216,29 @@ function TeamChat() {
           {/* Chat Area */}
           <div className="flex-1 flex flex-col h-full">
             {/* Team Header */}
-            <div className="p-2 sm:p-4 border-b bg-gray-600 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-              <div className="flex items-center">
-                <h1 className="text-lg sm:text-3xl font-bold text-white tracking-tighter leading-tight drop-shadow-md truncate max-w-[70vw]">
-                  {team?.name}
-                </h1>
-                <Button
-                  variant="ghost"
-                  className="ml-2 lg:hidden"
-                  onClick={() => setShowMobileMembers(!showMobileMembers)}
+            <div className="p-2 sm:p-4 border-b bg-gray-600 flex flex-col gap-2">
+              <div className="flex flex-col xs:flex-row xs:items-center xs:justify-between gap-2 w-full">
+                <div className="flex items-center w-full">
+                  <h1 className="text-lg sm:text-3xl font-bold text-white tracking-tighter leading-tight drop-shadow-md truncate max-w-full">
+                    {team?.name}
+                  </h1>
+                  <Button
+                    variant="ghost"
+                    className="ml-2 lg:hidden"
+                    onClick={() => setShowMobileMembers(!showMobileMembers)}
+                  >
+                    <Users className="h-5 w-5" />
+                  </Button>
+                </div>
+                <Button 
+                  variant="outline" 
+                  className="bg-gradient-to-r from-pink-500 to-purple-500 text-white shadow-lg hover:shadow-xl transition-all group flex items-center w-full xs:w-auto"
+                  onClick={generateInviteLink}
                 >
-                  <Users className="h-5 w-5" />
+                  <UserPlus className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
+                  <span className="block text-xs sm:text-base">Invite Members</span>
                 </Button>
               </div>
-              <Button 
-                variant="outline" 
-                className="bg-gradient-to-r from-pink-500 to-purple-500 text-white shadow-lg hover:shadow-xl transition-all group flex items-center"
-                onClick={generateInviteLink}
-              >
-                <UserPlus className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
-                <span className="block text-xs sm:text-base">Invite Members</span>
-              </Button>
             </div>
 
             {/* Invite Link Section */}
