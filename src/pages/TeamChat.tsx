@@ -748,14 +748,15 @@ function TeamChat() {
 
             {/* Invite Link Section */}
             {showInviteLink && inviteLink && (
-              <div className="p-2 sm:p-4 bg-blue-50 flex flex-col sm:flex-row items-start sm:items-center justify-between relative space-y-2 sm:space-y-0 overflow-x-auto">
+              <div className="p-2 sm:p-4 bg-blue-50 flex flex-col sm:flex-row items-start sm:items-center justify-between relative space-y-2 sm:space-y-0 overflow-x-auto w-full">
                 <div className="flex-1 w-full sm:mr-4">
                   <p className="text-sm text-black-800 font-medium">Share this invite link</p>
                   <input 
                     type="text" 
                     readOnly 
                     value={`${window.location.origin}${inviteLink}`} 
-                    className="w-full text-sm bg-gray-200 rounded-md p-2 mt-2 truncate"
+                    className="w-full text-sm bg-gray-200 rounded-md p-2 mt-2 truncate cursor-pointer"
+                    onClick={e => (e.target as HTMLInputElement).select()}
                   />
                 </div>
                 <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full sm:w-auto mt-2 sm:mt-0">
