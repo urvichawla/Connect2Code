@@ -493,7 +493,7 @@ import { useNavigate } from 'react-router-dom';
 import { signInWithPopup } from 'firebase/auth';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { auth, googleProvider, db } from '@/lib/firebase';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/Button';
 import { LogIn } from 'lucide-react';
 import { motion } from 'framer-motion';
 

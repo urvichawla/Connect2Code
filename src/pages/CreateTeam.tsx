@@ -368,7 +368,7 @@ import {
 } from 'firebase/firestore';
 import { useAuth } from '@/context/AuthContext';
 import { db } from '@/lib/firebase';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/Button';
 import { User, TeamRequest } from '@/types';
 import { Users, Plus, X, Check, Search } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';

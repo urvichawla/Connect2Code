@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { useAuth } from '@/context/AuthContext';
 import { db } from '@/lib/firebase';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/Button';
 import { collection, query, where, getDocs, deleteDoc, arrayRemove } from 'firebase/firestore';
 import { Users, MessageCircle, LogOut, Edit, ChevronDown, ChevronUp, Star } from 'lucide-react';
 import { User, Skill, SkillLevel, SkillCategory, ExperienceLevel } from '@/types';
