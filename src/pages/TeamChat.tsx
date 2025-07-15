@@ -508,7 +508,7 @@
 
 // export default TeamChat;
 import React, { useState, useEffect, useRef } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { 
@@ -521,22 +521,19 @@ import {
   getDocs,
   doc,
   getDoc,
-  setDoc,
-  updateDoc,
-  arrayUnion
+  setDoc
 } from 'firebase/firestore';
 import { useAuth } from '@/context/AuthContext';
 import { db } from '@/lib/firebase';
 import { Button } from '@/components/ui/Button';
 import { Team, Message, User } from '@/types';
-import { Send, Users, Info, Clock, UserPlus, Zap, Copy, Check, X, Menu } from 'lucide-react';
+import { Send, Users, Clock, UserPlus, Zap, Copy, Check, X } from 'lucide-react';
 import { formatDistance } from "date-fns";
 
 
 function TeamChat() {
   const { teamId } = useParams();
   const { user } = useAuth();
-  const navigate = useNavigate();
   const [team, setTeam] = useState<Team | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [members, setMembers] = useState<User[]>([]);
@@ -596,53 +593,6 @@ function TeamChat() {
   const closeInviteLink = () => {
     setShowInviteLink(false);
     setInviteLink('');
-  };
-
-  // Handle Team Join
-  const handleJoinTeam = async (inviteId: string) => {
-    if (!user) {
-      toast.error('You must be logged in to join a team');
-      navigate('/login');
-      return;
-    }
-
-    try {
-      const inviteDocRef = doc(db, 'team-invites', inviteId);
-      const inviteDoc = await getDoc(inviteDocRef);
-
-      if (!inviteDoc.exists()) {
-        toast.error('Invalid invite link');
-        return;
-      }
-
-      const inviteData = inviteDoc.data();
-      
-      if (
-        inviteData.status !== 'active' || 
-        new Date(inviteData.expiresAt) < new Date()
-      ) {
-        toast.error('Invite link has expired');
-        return;
-      }
-
-      const teamDocRef = doc(db, 'teams', inviteData.teamId);
-      
-      await updateDoc(teamDocRef, {
-        members: arrayUnion(user.uid)
-      });
-
-      await updateDoc(inviteDocRef, {
-        status: 'used',
-        usedBy: user.uid,
-        usedAt: new Date().toISOString()
-      });
-
-      toast.success('Successfully joined the team!');
-      navigate(`/team/${inviteData.teamId}`);
-    } catch (error) {
-      console.error('Error joining team:', error);
-      toast.error('Failed to join team');
-    }
   };
 
   useEffect(() => {
@@ -767,58 +717,6 @@ function TeamChat() {
     );
   }
 
-  const MembersList = () => (
-    <div className="space-y-3">
-      {members && members.length > 0 ? (
-        members.map((member) => {
-          const displayName = member.displayName || 'Anonymous';
-          const photoURL = member.photoURL || '';
-          const experience = member.experience || 'Unknown';
-          const initialLetter = displayName ? displayName.charAt(0) : '?';
-
-          return (
-            <div 
-              key={member.uid} 
-              className="bg-gray-400 rounded-lg p-3 shadow-sm hover:shadow-md transition-all cursor-pointer"
-              onClick={() => toggleMemberDetails(member.uid)}
-            >
-              <div className="flex items-center space-x-3">
-                {photoURL ? (
-                  <img
-                    src={photoURL}
-                    alt={displayName}
-                    className="h-10 w-10 rounded-full border-2 border-blue-200"
-                  />
-                ) : (
-                  <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
-                    <span className="text-blue-600 text-sm font-bold">
-                      {initialLetter}
-                    </span>
-                  </div>
-                )}
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-gray-800">{displayName}</p>
-                  <p className="text-xs text-blue-600 flex items-center">
-                    <Zap className="h-3 w-3 mr-1" />
-                    {experience} Developer
-                  </p>
-                </div>
-              </div>
-              {showMemberDetails === member.uid && (
-                <div className="mt-3 bg-blue-50 rounded-lg p-3 text-sm text-gray-700">
-                  <p><strong>Experience:</strong> {experience}</p>
-                  {member.email && <p><strong>Email:</strong> {member.email}</p>}
-                </div>
-              )}
-            </div>
-          );
-        })
-      ) : (
-        <p className="text-gray-500 text-center">No team members found</p>
-      )}
-    </div>
-  );
-  
   return (
     <div className="mt-0 sm:mt-20">
       <ToastContainer position="top-right" />
@@ -840,17 +738,17 @@ function TeamChat() {
               </div>
               <Button 
                 variant="outline" 
-                className="bg-gradient-to-r from-pink-500 to-purple-500 text-white shadow-lg hover:shadow-xl transition-all group"
+                className="bg-gradient-to-r from-pink-500 to-purple-500 text-white shadow-lg hover:shadow-xl transition-all group flex items-center"
                 onClick={generateInviteLink}
               >
-                <UserPlus className="h-4 w-4 sm:h-5 sm:w-5 sm:mr-2" />
-                <span className="hidden sm:inline">Invite Members</span>
+                <UserPlus className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
+                <span className="block text-xs sm:text-base">Invite Members</span>
               </Button>
             </div>
 
             {/* Invite Link Section */}
             {showInviteLink && inviteLink && (
-              <div className="p-2 sm:p-4 bg-blue-50 flex flex-col sm:flex-row items-start sm:items-center justify-between relative space-y-2 sm:space-y-0">
+              <div className="p-2 sm:p-4 bg-blue-50 flex flex-col sm:flex-row items-start sm:items-center justify-between relative space-y-2 sm:space-y-0 overflow-x-auto">
                 <div className="flex-1 w-full sm:mr-4">
                   <p className="text-sm text-black-800 font-medium">Share this invite link</p>
                   <input 
@@ -860,7 +758,7 @@ function TeamChat() {
                     className="w-full text-sm bg-gray-200 rounded-md p-2 mt-2 truncate"
                   />
                 </div>
-                <div className="flex space-x-2 w-full sm:w-auto">
+                <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full sm:w-auto mt-2 sm:mt-0">
                   <Button 
                     variant="outline" 
                     onClick={copyInviteLink}
@@ -876,7 +774,7 @@ function TeamChat() {
                   <Button 
                     variant="outline" 
                     onClick={closeInviteLink}
-                    className="text-red-600 hover:bg-red-50"
+                    className="text-red-600 hover:bg-red-50 flex-1 sm:flex-none"
                   >
                     <X className="h-4 w-4 sm:h-5 sm:w-5" />
                   </Button>
