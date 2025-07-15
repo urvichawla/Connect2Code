@@ -725,7 +725,7 @@ function TeamChat() {
           {/* Chat Area */}
           <div className="flex-1 flex flex-col h-full">
             {/* Team Header */}
-            <div className="p-2 sm:p-4 border-b bg-gray-600 flex items-center justify-between">
+            <div className="p-2 sm:p-4 border-b bg-gray-600 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
               <div className="flex items-center">
                 <h1 className="text-xl sm:text-3xl font-bold text-gray-200 sm:text-gray-100 tracking-tighter leading-tight drop-shadow-md">{team?.name}</h1>
                 <Button
